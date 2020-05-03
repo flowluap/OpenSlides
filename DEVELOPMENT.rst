@@ -262,6 +262,8 @@ This is an example ``nginx.conf`` configuration for Daphne listing on port
                 try_files $uri $uri/ /index.html;
             }
             location /apps {
+                # Pass header to avoid localhost:8000 as domainname
+                proxy_set_header Host $http_host;
                 proxy_pass http://localhost:8000;
             }
             location /media {
